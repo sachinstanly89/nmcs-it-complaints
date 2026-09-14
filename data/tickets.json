@@ -1,0 +1,144 @@
+﻿[
+    {
+        "id":  "NMCS-IT-2026-0009",
+        "category":  "network issue",
+        "itNotes":  "",
+        "assignedTo":  "Unassigned",
+        "teacherClass":  "Class 4",
+        "teacherName":  "Mary George",
+        "description":  "Wi-Fi disconnecting intermittently during class",
+        "priority":  "Medium",
+        "teacherPhone":  "8745233566",
+        "teacherDivision":  "Division C",
+        "roomLocation":  "Class 4 - Division C",
+        "status":  "Pending",
+        "createdAt":  "2026-09-14 09:50",
+        "timeline":  [
+                         {
+                             "time":  "2026-09-14 09:50",
+                             "text":  "Complaint registered by Mary George (Class 4 - Division C)"
+                         }
+                     ]
+    },
+    {
+        "id":  "NMCS-IT-2026-0008",
+        "category":  "Extramarks not working",
+        "itNotes":  "",
+        "assignedTo":  "Unassigned",
+        "teacherClass":  "Class 5",
+        "teacherName":  "Kurian Joseph",
+        "description":  "Extramarks module login session timed out and video not loading",
+        "priority":  "High",
+        "teacherPhone":  "8745621582",
+        "teacherDivision":  "Division C",
+        "roomLocation":  "Room 205",
+        "status":  "Pending",
+        "createdAt":  "2026-09-14 09:44",
+        "timeline":  [
+                         {
+                             "time":  "2026-09-14 09:44",
+                             "text":  "Complaint registered by Kurian Joseph (Class 5 - Division C)"
+                         }
+                     ]
+    },
+    {
+        "id":  "NMCS-IT-2026-0007",
+        "category":  "Extramarks not working",
+        "itNotes":  "Checked account token; re-authenticating server node",
+        "assignedTo":  "Sachin (IT)",
+        "teacherClass":  "Class 12",
+        "teacherName":  "P. D. Rafael",
+        "description":  "Extramarks application license check failure",
+        "priority":  "Medium",
+        "teacherPhone":  "9895156719",
+        "teacherDivision":  "Division B",
+        "roomLocation":  "Class 12 - Division B",
+        "status":  "In Progress",
+        "createdAt":  "2026-09-14 07:00",
+        "timeline":  [
+                         {
+                             "time":  "2026-09-14 08:15",
+                             "text":  "Status changed to In Progress by IT Admin"
+                         },
+                         {
+                             "time":  "2026-09-14 07:00",
+                             "text":  "Complaint registered by P. D. Rafael (Class 12 - Division B)"
+                         }
+                     ]
+    },
+    {
+        "id":  "NMCS-IT-2026-0006",
+        "category":  "TEACHERS \u0026 STUDENTS PRESENTATIONS not working",
+        "itNotes":  "Technician checking HDMI splitter in Room 9E",
+        "assignedTo":  "Sachin (IT)",
+        "teacherClass":  "Class 9",
+        "teacherName":  "Mary Varghese",
+        "description":  "HDMI cable input not detecting laptop display on projector",
+        "priority":  "High",
+        "teacherPhone":  "8725554366",
+        "teacherDivision":  "Division E",
+        "roomLocation":  "Class 9 - Division E",
+        "status":  "In Progress",
+        "createdAt":  "2026-09-14 06:59",
+        "timeline":  [
+                         {
+                             "time":  "2026-09-14 08:30",
+                             "text":  "Assigned to Sachin (IT)"
+                         },
+                         {
+                             "time":  "2026-09-14 06:59",
+                             "text":  "Complaint registered by Mary Varghese"
+                         }
+                     ]
+    },
+    {
+        "id":  "NMCS-IT-2026-0005",
+        "category":  "Smart Board not working",
+        "itNotes":  "Recalibrated touch sensors and updated driver. Working smoothly.",
+        "assignedTo":  "Sachin (IT)",
+        "teacherClass":  "Class 10",
+        "teacherName":  "Thomas Kurian",
+        "description":  "Smart Board touch calibration offset by 3 inches",
+        "priority":  "Medium",
+        "teacherPhone":  "9447812903",
+        "teacherDivision":  "Division A",
+        "roomLocation":  "Room 304",
+        "status":  "Resolved",
+        "createdAt":  "2026-09-13 11:20",
+        "timeline":  [
+                         {
+                             "time":  "2026-09-13 14:00",
+                             "text":  "Status changed to Resolved by IT Admin"
+                         },
+                         {
+                             "time":  "2026-09-13 11:20",
+                             "text":  "Complaint registered by Thomas Kurian"
+                         }
+                     ]
+    },
+    {
+        "id":  "NMCS-IT-2026-0004",
+        "category":  "other issue",
+        "itNotes":  "3.5mm audio jack replaced with gold-plated connector.",
+        "assignedTo":  "Sachin (IT)",
+        "teacherClass":  "Kindergarten (LKG/UKG)",
+        "teacherName":  "Sr. Rose",
+        "description":  "Audio speakers making static noise when playing rhymes",
+        "priority":  "Low",
+        "teacherPhone":  "9446210985",
+        "teacherDivision":  "Division A",
+        "roomLocation":  "KG Block Room 1",
+        "status":  "Resolved",
+        "createdAt":  "2026-09-13 09:10",
+        "timeline":  [
+                         {
+                             "time":  "2026-09-13 10:45",
+                             "text":  "Status changed to Resolved by IT Admin"
+                         },
+                         {
+                             "time":  "2026-09-13 09:10",
+                             "text":  "Complaint registered by Sr. Rose"
+                         }
+                     ]
+    }
+]

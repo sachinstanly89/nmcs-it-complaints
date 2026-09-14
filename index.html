@@ -1,0 +1,695 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0a1f38">
+  
+  <title>NMCS IT Complaint Register | Nirmala Matha Central School</title>
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="NMCS IT Complaint Register - Nirmala Matha Central School">
+  <meta name="description" content="Mobile IT Complaint Register for teachers and staff of Nirmala Matha Central School. Fast classroom IT helpdesk and real-time repair tracking.">
+
+  <!-- Open Graph / WhatsApp Preview Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NMCS IT Complaint Register - Nirmala Matha Central School">
+  <meta property="og:description" content="Report classroom IT issues (Extramarks, presentations, network, smart boards) directly to school IT staff.">
+  <meta property="og:image" content="assets/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            nmcs: {
+              navy: '#0f2b48',
+              navydark: '#0a1f38',
+              blue: '#1e40af',
+              gold: '#f59e0b',
+              golddark: '#d97706',
+              red: '#dc2626',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Mobile-First CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-slate-950 text-slate-800 antialiased selection:bg-amber-500 selection:text-white">
+
+  <!-- Printable Area (Rendered only on window.print()) -->
+  <div id="print-container" class="printable-area hidden"></div>
+
+  <!-- Desktop Top Control Bar (Visible only on PC/Laptop screens) -->
+  <div id="desktop-view-toggle" class="w-full bg-slate-900 border-b border-slate-800 px-4 py-2.5 flex items-center justify-between text-xs text-slate-300 no-print">
+    <div class="flex items-center gap-2">
+      <img src="assets/logo.png" alt="NMCS Crest" class="w-6 h-6 object-contain">
+      <span class="font-bold text-white tracking-wide">NIRMALA MATHA CENTRAL SCHOOL &bull; IT COMPLAINT REGISTER</span>
+      <span class="hidden md:inline px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800/60 font-medium">Mobile-Optimized System</span>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <!-- Device View Switcher -->
+      <div class="bg-slate-800 p-1 rounded-lg border border-slate-700 flex items-center gap-1">
+        <button onclick="setDeviceViewMode('simulator')" id="btn-mode-sim" class="px-2.5 py-1 rounded font-semibold transition bg-blue-600 text-white flex items-center gap-1.5 shadow">
+          <i data-lucide="smartphone" class="w-3.5 h-3.5"></i>
+          <span>Mobile View</span>
+        </button>
+        <button onclick="setDeviceViewMode('full')" id="btn-mode-full" class="px-2.5 py-1 rounded font-semibold transition text-slate-400 hover:text-white flex items-center gap-1.5">
+          <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
+          <span>Full Width</span>
+        </button>
+      </div>
+
+      <!-- Share QR Code Button -->
+      <button onclick="openShareModal()" class="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 rounded-lg transition flex items-center gap-1.5 font-medium" title="Open on smartphone via Wi-Fi">
+        <i data-lucide="qr-code" class="w-3.5 h-3.5"></i>
+        <span class="hidden sm:inline">Phone Access Link</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Device Wrapper Container -->
+  <div id="device-wrapper" class="simulator-mode">
+
+    <!-- Mobile Application Container -->
+    <div id="app-container">
+
+      <!-- Smartphone Bezel Bar (Only on Desktop Simulator Mode) -->
+      <div id="simulator-bezel" class="no-print">
+        <span id="bezel-time" class="tracking-wider">9:41</span>
+        <div class="dynamic-island">
+          <div class="camera-lens"></div>
+        </div>
+        <div class="flex items-center gap-1.5 text-slate-300">
+          <i data-lucide="signal" class="w-3 h-3"></i>
+          <i data-lucide="wifi" class="w-3 h-3 text-emerald-400"></i>
+          <i data-lucide="battery-charging" class="w-3.5 h-3.5 text-slate-200"></i>
+        </div>
+      </div>
+
+      <!-- Mobile App Header -->
+      <header class="mobile-app-bar px-4 py-2.5 flex items-center justify-between no-print shrink-0">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-white p-1 flex items-center justify-center school-logo-glow border-2 border-amber-400 shrink-0">
+            <img src="assets/logo.png" alt="Nirmala Matha Central School Crest" class="w-full h-full object-contain">
+          </div>
+          <div>
+            <h1 class="text-sm font-extrabold text-white font-display tracking-tight leading-tight">NIRMALA MATHA CENTRAL SCHOOL</h1>
+            <p class="text-[11px] text-amber-300 font-semibold tracking-wide flex items-center gap-1">
+              <span>IT COMPLAINT REGISTER</span>
+              <span class="text-blue-300 font-normal">&bull; Light &amp; Life</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Server Sync Dot -->
+          <div id="sync-dot-badge" class="flex items-center gap-1 px-2 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/50 text-[10px] text-emerald-300 font-semibold" title="Live Database Connected">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="sync-text-short" class="hidden xs:inline">Live</span>
+          </div>
+
+          <!-- IT Admin Key Button -->
+          <button onclick="handleAdminTabClick('admin')" id="header-admin-btn" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-amber-400 border border-amber-400/30 transition shadow-sm" title="IT Admin Portal">
+            <i data-lucide="shield" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Scrollable App Content -->
+      <div id="app-scroll-content">
+
+        <!-- =================================================================== -->
+        <!-- VIEW 1: LODGE COMPLAINT (Teacher Portal)                            -->
+        <!-- =================================================================== -->
+        <section id="view-lodge" class="tab-view p-4 space-y-4">
+          
+          <!-- Faculty Welcome Banner Card -->
+          <div class="rounded-2xl p-4 text-white bg-gradient-to-br from-blue-900 via-indigo-950 to-slate-900 border border-blue-800/80 shadow-sm relative overflow-hidden">
+            <div class="relative z-10">
+              <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-400/20 text-amber-300 border border-amber-400/30 mb-2">
+                <i data-lucide="check-circle" class="w-3 h-3 text-amber-400"></i>
+                <span>Classroom Technical Support</span>
+              </div>
+              <h2 class="text-lg font-bold font-display text-white leading-snug">Report IT or Classroom Issue</h2>
+              <p class="text-xs text-blue-100 mt-1 leading-relaxed">
+                Fill the quick details below. An IT technician will be dispatched promptly to assist your class.
+              </p>
+            </div>
+            <div class="absolute right-2 -bottom-4 opacity-10 text-white pointer-events-none">
+              <i data-lucide="laptop" style="width: 110px; height: 110px;"></i>
+            </div>
+          </div>
+
+          <!-- Teacher Complaint Form -->
+          <form id="complaint-form" onsubmit="handleTeacherSubmit(event)" class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm space-y-4">
+            
+            <!-- Section 1: Teacher & Classroom Details -->
+            <div class="space-y-3.5">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-2">
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5 uppercase tracking-wider">
+                  <i data-lucide="user" class="w-3.5 h-3.5 text-blue-600"></i>
+                  <span>Teacher &amp; Classroom</span>
+                </span>
+                <span class="text-[10px] text-red-500 font-semibold">* Required fields</span>
+              </div>
+
+              <!-- Teacher Name -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">
+                  Teacher's Name <span class="text-red-500">*</span>
+                </label>
+                <div class="relative">
+                  <i data-lucide="user-check" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+                  <input type="text" id="teacherName" required placeholder="e.g. Mrs. Mary George / Mr. Kurian"
+                    class="mobile-input pl-10">
+                </div>
+              </div>
+
+              <!-- Class & Division Grid (2 Columns on Mobile) -->
+              <div class="grid grid-cols-2 gap-3">
+                <!-- Class Dropdown -->
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">
+                    Class / Grade <span class="text-red-500">*</span>
+                  </label>
+                  <select id="teacherClass" required class="mobile-select text-xs sm:text-sm font-medium">
+                    <option value="">-- Class --</option>
+                    <option value="Class 1">Class 1</option>
+                    <option value="Class 2">Class 2</option>
+                    <option value="Class 3">Class 3</option>
+                    <option value="Class 4">Class 4</option>
+                    <option value="Class 5">Class 5</option>
+                    <option value="Class 6">Class 6</option>
+                    <option value="Class 7">Class 7</option>
+                    <option value="Class 8">Class 8</option>
+                    <option value="Class 9">Class 9</option>
+                    <option value="Class 10">Class 10</option>
+                    <option value="Class 11">Class 11</option>
+                    <option value="Class 12">Class 12</option>
+                    <option value="Kindergarten (LKG/UKG)">Kindergarten</option>
+                    <option value="Computer Science Lab">CS Lab</option>
+                    <option value="Science Lab / Robotics">Science Lab</option>
+                    <option value="Staff Room">Staff Room</option>
+                    <option value="Auditorium / Library">Auditorium / Library</option>
+                  </select>
+                </div>
+
+                <!-- Division Dropdown -->
+                <div>
+                  <label class="block text-xs font-semibold text-slate-700 mb-1">
+                    Division <span class="text-red-500">*</span>
+                  </label>
+                  <select id="teacherDivision" required class="mobile-select text-xs sm:text-sm font-medium">
+                    <option value="">-- Div --</option>
+                    <option value="Division A">Division A</option>
+                    <option value="Division B">Division B</option>
+                    <option value="Division C">Division C</option>
+                    <option value="Division D">Division D</option>
+                    <option value="Division E">Division E</option>
+                    <option value="General / NA">General / NA</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Teacher Mobile (Mandatory for WhatsApp Token & Updates) -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1 flex items-center justify-between">
+                  <span>Teacher Mobile Number <span class="text-red-500">*</span></span>
+                  <span class="text-[10px] text-emerald-700 font-bold flex items-center gap-1">
+                    <i data-lucide="message-circle" class="w-3 h-3"></i> WhatsApp Token
+                  </span>
+                </label>
+                <div class="relative">
+                  <div class="absolute left-3.5 top-3.5 text-xs font-bold text-slate-500 border-r border-slate-200 pr-2 select-none">
+                    +91
+                  </div>
+                  <input type="tel" id="teacherPhone" required pattern="[0-9]{10}" maxlength="10"
+                    placeholder="10-digit mobile (e.g. 9847123456)"
+                    class="mobile-input pl-14 font-medium tracking-wide">
+                </div>
+                <p class="text-[10px] text-slate-500 mt-1">Ticket reference will be sent to this number via WhatsApp &amp; SMS.</p>
+              </div>
+
+              <!-- Room / Exact Location (Optional) -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">
+                  Room No. / Exact Location (Optional)
+                </label>
+                <div class="relative">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+                  <input type="text" id="roomLocation" placeholder="e.g. Room 204 (2nd Floor) or CS Lab 1"
+                    class="mobile-input pl-10">
+                </div>
+              </div>
+            </div>
+
+            <!-- Section 2: Complaint Details (User Specified Dropdown List) -->
+            <div class="space-y-3.5 pt-2 border-t border-slate-100">
+              <div class="flex items-center justify-between pb-1">
+                <span class="text-xs font-bold text-slate-800 flex items-center gap-1.5 uppercase tracking-wider">
+                  <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-amber-500"></i>
+                  <span>Complaint Category</span>
+                </span>
+              </div>
+
+              <!-- Complaint Category Dropdown with the exact 5 items required -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">
+                  Select Complaint <span class="text-red-500">*</span>
+                </label>
+                <select id="complaintCategory" required onchange="handleCategorySelection(this.value)"
+                  class="mobile-select font-semibold text-slate-900 border-2 border-blue-200 bg-blue-50/30">
+                  <option value="">-- Tap to Select Issue --</option>
+                  <option value="Extramarks not working">Extramarks not working</option>
+                  <option value="TEACHERS & STUDENTS PRESENTATIONS not working">TEACHERS & STUDENTS PRESENTATIONS not working</option>
+                  <option value="network issue">network issue</option>
+                  <option value="Smart Board not working">Smart Board not working</option>
+                  <option value="other issue">other issue</option>
+                </select>
+              </div>
+
+              <!-- Dynamic Description Field (Expands automatically) -->
+              <div>
+                <label id="lbl-description" class="block text-xs font-semibold text-slate-700 mb-1">
+                  Specific Remarks / Symptoms <span id="desc-required-star" class="text-slate-400 font-normal">(Optional)</span>
+                </label>
+                <textarea id="complaintDescription" rows="2" placeholder="Briefly describe what happened (e.g. HDMI not connecting, Extramarks error message, Wi-Fi password prompt, or touch lag)..."
+                  class="w-full p-3 text-xs sm:text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                <p id="other-hint" class="hidden text-xs text-amber-800 bg-amber-50 p-2.5 rounded-xl border border-amber-200 mt-1 flex items-start gap-1.5">
+                  <i data-lucide="info" class="w-4 h-4 text-amber-600 shrink-0 mt-0.5"></i>
+                  <span>Please type details of the "other issue" so the IT team brings appropriate spares.</span>
+                </p>
+              </div>
+
+              <!-- Initial Urgency Level -->
+              <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center justify-between">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700">Class Urgency</label>
+                  <span class="text-[10px] text-slate-500">Is a class currently in progress?</span>
+                </div>
+                <select id="teacherPriority" class="text-xs font-bold px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-slate-800">
+                  <option value="High">High (Class In Session)</option>
+                  <option value="Medium" selected>Medium (Normal)</option>
+                  <option value="Low">Low (Preventive)</option>
+                </select>
+              </div>
+
+            </div>
+
+            <!-- Submit Button (Thumb Friendly) -->
+            <div class="pt-2">
+              <button type="submit" id="btn-submit-complaint" class="mobile-btn-primary">
+                <i data-lucide="send" class="w-4 h-4"></i>
+                <span>Submit IT Complaint</span>
+              </button>
+            </div>
+
+          </form>
+
+          <!-- Quick Support Contact Pill -->
+          <div class="bg-slate-100 rounded-xl p-3 text-center text-xs text-slate-600 flex items-center justify-center gap-2">
+            <i data-lucide="phone-call" class="w-4 h-4 text-blue-600"></i>
+            <span>Emergency IT Intercom: <strong>Ext: 04872337904 / 32</strong></span>
+          </div>
+
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- VIEW 2: TRACK TICKET (Teacher Self-Lookup)                          -->
+        <!-- =================================================================== -->
+        <section id="view-track" class="tab-view hidden p-4 space-y-4">
+          
+          <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm space-y-3">
+            <h2 class="text-base font-bold font-display text-slate-900 flex items-center gap-2">
+              <i data-lucide="search" class="w-4 h-4 text-blue-600"></i>
+              <span>Track Ticket Status</span>
+            </h2>
+            <p class="text-xs text-slate-500">
+              Enter your Ticket Token (e.g. <code>NMCS-IT-2026-0009</code>) or your 10-digit registered mobile number to check the repair progress.
+            </p>
+
+            <div class="flex gap-2">
+              <input type="text" id="track-search-input" placeholder="Ticket ID or Mobile Number"
+                class="mobile-input text-xs sm:text-sm" onkeyup="if(event.key==='Enter') searchTeacherTicket()">
+              <button onclick="searchTeacherTicket()" class="px-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl flex items-center justify-center shrink-0">
+                <i data-lucide="search" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Track Result Container -->
+          <div id="track-result-container" class="space-y-3">
+            <!-- Populated dynamically by app.js -->
+            <div class="bg-white rounded-2xl p-8 text-center text-slate-400 border border-dashed border-slate-200">
+              <i data-lucide="clipboard-check" class="w-8 h-8 mx-auto text-slate-300 mb-2"></i>
+              <p class="text-xs font-medium">Enter your Ticket Token or Phone to view status</p>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- VIEW 3: IT ADMIN REGISTER (Protected Access)                        -->
+        <!-- =================================================================== -->
+        <section id="view-admin" class="tab-view hidden p-4 space-y-4">
+
+          <!-- Admin Locked State Screen (Shown if not logged in) -->
+          <div id="admin-locked-gate" class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm text-center space-y-4">
+            <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center mx-auto border border-amber-200">
+              <i data-lucide="lock" class="w-7 h-7"></i>
+            </div>
+            <div>
+              <h2 class="text-lg font-bold font-display text-slate-900">IT Admin Register Portal</h2>
+              <p class="text-xs text-slate-500 mt-1 max-w-xs mx-auto">
+                Only school IT administrators can view complaint statuses, set priority levels, and manage tickets.
+              </p>
+            </div>
+            
+            <button onclick="openAdminLoginModal()" class="mobile-btn-primary max-w-xs mx-auto">
+              <i data-lucide="key" class="w-4 h-4"></i>
+              <span>Login with Security ID &amp; Password</span>
+            </button>
+          </div>
+
+          <!-- Admin Authorized Dashboard (Shown when logged in) -->
+          <div id="admin-dashboard" class="hidden space-y-4">
+
+            <!-- Admin Header Pill -->
+            <div class="bg-slate-900 text-white rounded-2xl p-3.5 border border-slate-800 shadow-sm flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+                  <i data-lucide="shield-check" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="text-xs font-bold text-white flex items-center gap-1.5">
+                    <span>IT Admin:</span>
+                    <span class="text-amber-400 font-mono">nmcs</span>
+                  </div>
+                  <div class="text-[10px] text-slate-400">Authenticated Session</div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-1.5">
+                <button onclick="manualSyncFromUI()" class="p-2 bg-slate-800 hover:bg-slate-700 text-blue-300 rounded-xl transition border border-slate-700" title="Sync live database">
+                  <i data-lucide="refresh-cw" class="w-3.5 h-3.5" id="sync-icon"></i>
+                </button>
+                <button onclick="logoutAdmin()" class="px-2.5 py-1.5 bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold rounded-xl transition flex items-center gap-1">
+                  <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+                  <span>Logout</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Real-Time Metric Counters (2x2 Grid on Mobile) -->
+            <div class="grid grid-cols-2 gap-2.5">
+              <!-- Total -->
+              <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Total Complaints</div>
+                <div id="kpi-total" class="text-xl font-extrabold font-display text-slate-800 mt-0.5">0</div>
+              </div>
+              
+              <!-- Pending -->
+              <div class="bg-amber-50 p-3 rounded-2xl border border-amber-200 shadow-sm">
+                <div class="text-[10px] font-bold text-amber-700 uppercase tracking-wider flex items-center justify-between">
+                  <span>Pending</span>
+                  <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                </div>
+                <div id="kpi-pending" class="text-xl font-extrabold font-display text-amber-700 mt-0.5">0</div>
+              </div>
+
+              <!-- In Progress -->
+              <div class="bg-blue-50 p-3 rounded-2xl border border-blue-200 shadow-sm">
+                <div class="text-[10px] font-bold text-blue-700 uppercase tracking-wider">In Progress</div>
+                <div id="kpi-progress" class="text-xl font-extrabold font-display text-blue-700 mt-0.5">0</div>
+              </div>
+
+              <!-- Resolved -->
+              <div class="bg-emerald-50 p-3 rounded-2xl border border-emerald-200 shadow-sm">
+                <div class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Resolved</div>
+                <div id="kpi-resolved" class="text-xl font-extrabold font-display text-emerald-700 mt-0.5">0</div>
+              </div>
+            </div>
+
+            <!-- Mobile Search Bar -->
+            <div class="relative">
+              <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+              <input type="text" id="admin-search" oninput="applyFilters()" placeholder="Search teacher, class, ticket #, or issue..."
+                class="mobile-input pl-10 text-xs sm:text-sm">
+            </div>
+
+            <!-- Horizontally Scrollable Filter Pills -->
+            <div class="filter-pills-bar">
+              <button onclick="setFilterStatus('ALL')" class="filter-pill active" id="pill-filter-all">
+                All (<span id="count-all">0</span>)
+              </button>
+              <button onclick="setFilterStatus('Pending')" class="filter-pill" id="pill-filter-pending">
+                Pending (<span id="count-pending">0</span>)
+              </button>
+              <button onclick="setFilterStatus('In Progress')" class="filter-pill" id="pill-filter-progress">
+                In Progress (<span id="count-progress">0</span>)
+              </button>
+              <button onclick="setFilterStatus('Resolved')" class="filter-pill" id="pill-filter-resolved">
+                Resolved (<span id="count-resolved">0</span>)
+              </button>
+              <button onclick="setFilterPriority('Urgent')" class="filter-pill" id="pill-filter-urgent">
+                ðŸ”¥ Urgent
+              </button>
+              <button onclick="setFilterPriority('High')" class="filter-pill" id="pill-filter-high">
+                âš¡ High Priority
+              </button>
+            </div>
+
+            <!-- Admin Complaint Cards List (Mobile-Optimized Stream) -->
+            <div id="admin-tickets-container" class="space-y-3">
+              <!-- Dynamically populated by renderAdminTickets() in app.js -->
+            </div>
+
+            <!-- Admin Export & Print Actions -->
+            <div class="grid grid-cols-2 gap-2 pt-2">
+              <button onclick="exportToCSV()" class="p-3 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Export CSV</span>
+              </button>
+              <button onclick="printTechnicianWorkOrders()" class="p-3 bg-slate-800 hover:bg-slate-700 text-amber-300 border border-slate-700 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm">
+                <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                <span>Print Work Sheet</span>
+              </button>
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <!-- Mobile Bottom Navigation Bar -->
+      <nav class="mobile-bottom-nav no-print">
+        <!-- Tab 1: Lodge -->
+        <button onclick="switchTab('lodge')" id="nav-item-lodge" class="bottom-nav-item active">
+          <i data-lucide="edit-3" class="w-5 h-5"></i>
+          <span>Lodge</span>
+        </button>
+
+        <!-- Tab 2: Track -->
+        <button onclick="switchTab('track')" id="nav-item-track" class="bottom-nav-item">
+          <i data-lucide="search" class="w-5 h-5"></i>
+          <span>My Ticket</span>
+        </button>
+
+        <!-- Tab 3: Admin -->
+        <button onclick="handleAdminTabClick('admin')" id="nav-item-admin" class="bottom-nav-item">
+          <i data-lucide="shield" class="w-5 h-5"></i>
+          <span>IT Admin</span>
+        </button>
+      </nav>
+
+    </div>
+
+  </div>
+
+  <!-- ======================================================================= -->
+  <!-- MODALS & BOTTOM SHEETS                                                  -->
+  <!-- ======================================================================= -->
+
+  <!-- Modal 1: IT Admin Login Sheet / Modal -->
+  <div id="modal-admin-login" class="modal-overlay hidden no-print">
+    <div class="bottom-sheet p-5 space-y-4">
+      <div class="sheet-drag-handle"></div>
+      
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
+            <i data-lucide="lock" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-slate-900 font-display">IT Administrator Login</h3>
+            <p class="text-[11px] text-slate-500">Security Gate for NMCS IT Staff</p>
+          </div>
+        </div>
+        <button onclick="closeAdminLoginModal()" class="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <!-- Error Alert -->
+      <div id="login-error-banner" class="hidden p-3 bg-red-50 text-red-700 text-xs rounded-xl border border-red-200 flex items-center gap-2">
+        <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 text-red-600"></i>
+        <span>Invalid Security ID or Password. Please retry.</span>
+      </div>
+
+      <!-- Form -->
+      <form onsubmit="handleAdminLogin(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Security ID</label>
+          <div class="relative">
+            <i data-lucide="user-check" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+            <input type="text" id="admin-security-id" required autocomplete="username" placeholder="nmcs"
+              class="mobile-input pl-10 font-mono text-sm">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Password</label>
+          <div class="relative">
+            <i data-lucide="key" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+            <input type="password" id="admin-password" required autocomplete="current-password" placeholder="admin@nmcs"
+              class="mobile-input pl-10 pr-10 font-mono text-sm">
+            <button type="button" onclick="togglePasswordVisibility('admin-password', this)" class="absolute right-3 top-3.5 text-slate-400 hover:text-slate-600">
+              <i data-lucide="eye" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="mobile-btn-primary">
+            <i data-lucide="unlock" class="w-4 h-4"></i>
+            <span>Unlock Admin Portal</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="text-[11px] text-slate-400 text-center pt-1 border-t border-slate-100">
+        Default credentials: ID: <code class="font-mono text-slate-600 font-bold">nmcs</code> | Pass: <code class="font-mono text-slate-600 font-bold">admin@nmcs</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Ticket Registered Success Bottom Sheet -->
+  <div id="modal-ticket-success" class="modal-overlay hidden no-print">
+    <div class="bottom-sheet p-5 space-y-4 text-center">
+      <div class="sheet-drag-handle"></div>
+
+      <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto border-4 border-emerald-200">
+        <i data-lucide="check-circle-2" class="w-9 h-9"></i>
+      </div>
+
+      <div>
+        <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 mb-1">
+          Complaint Successfully Registered
+        </span>
+        <h3 class="text-xl font-extrabold text-slate-900 font-display" id="modal-ticket-id">NMCS-IT-2026-0001</h3>
+        <p class="text-xs text-slate-500 mt-1" id="modal-ticket-meta">Teacher: Mrs. Mary George &bull; Class 4 - Division C</p>
+      </div>
+
+      <!-- WhatsApp Dispatch Card -->
+      <div class="bg-emerald-50 rounded-2xl p-4 border border-emerald-200 text-left space-y-2">
+        <div class="flex items-center justify-between text-xs font-bold text-emerald-900">
+          <span class="flex items-center gap-1.5">
+            <i data-lucide="message-circle" class="w-4 h-4 text-emerald-600"></i>
+            <span>Send Ticket Token via WhatsApp</span>
+          </span>
+          <span class="text-[10px] text-emerald-700">1-Tap</span>
+        </div>
+        <p class="text-[11px] text-emerald-800 leading-snug">
+          Keep this ticket token for tracking. Tap below to send confirmation directly to the teacher's WhatsApp or forward to IT staff.
+        </p>
+        <a id="btn-modal-whatsapp" href="#" target="_blank" class="w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition">
+          <i data-lucide="send" class="w-3.5 h-3.5"></i>
+          <span>Open in WhatsApp</span>
+        </a>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="grid grid-cols-2 gap-2 pt-1">
+        <button onclick="trackCurrentSubmittedTicket()" class="p-3 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
+          <i data-lucide="search" class="w-3.5 h-3.5"></i>
+          <span>Track Ticket</span>
+        </button>
+        <button onclick="closeSuccessModal()" class="p-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
+          <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+          <span>New Complaint</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Ticket Detail & Status Editor (For IT Admin) -->
+  <div id="modal-ticket-detail" class="modal-overlay hidden no-print">
+    <div class="bottom-sheet p-5 space-y-4 max-h-[92vh] overflow-y-auto" id="ticket-detail-content">
+      <!-- Populated dynamically by openTicketDetailModal() -->
+    </div>
+  </div>
+
+  <!-- Modal 4: Mobile Wi-Fi Access QR Code -->
+  <div id="modal-share-qr" class="modal-overlay hidden no-print">
+    <div class="bottom-sheet p-5 space-y-4 text-center">
+      <div class="sheet-drag-handle"></div>
+
+      <div class="flex items-center justify-between pb-2 border-b border-slate-100 text-left">
+        <div>
+          <h3 class="text-sm font-bold text-slate-900 font-display">Access on Mobile Phone</h3>
+          <p class="text-[11px] text-slate-500">Scan QR Code or open Wi-Fi link</p>
+        </div>
+        <button onclick="closeShareModal()" class="p-1.5 text-slate-400 hover:text-slate-600 rounded-lg">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col items-center justify-center">
+        <!-- Live QR Code -->
+        <img id="qr-code-img" src="" alt="Mobile Wi-Fi QR Code" class="w-44 h-44 rounded-xl border border-slate-300 bg-white p-2">
+        <p class="text-xs font-mono text-slate-700 font-bold mt-3 break-all" id="share-url-text">http://localhost:8080/</p>
+      </div>
+
+      <p class="text-xs text-slate-500">
+        Connect your smartphone to the school Wi-Fi and scan this QR code using your phone camera to open the IT Complaint Register!
+      </p>
+
+      <button onclick="copyShareUrl()" class="mobile-btn-primary">
+        <i data-lucide="copy" class="w-4 h-4"></i>
+        <span>Copy Link</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+
+</body>
+</html>
